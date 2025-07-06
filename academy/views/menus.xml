@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem
+        id="academy_menu_root"
+        name="Academy"
+        sequence="10"/>
+    
+    <menuitem
+        id="academy_course_menu"
+        name="Courses"
+        parent="academy_menu_root"
+        action="academy_course_action"
+        sequence="5"/>
+    
+    <menuitem
+        id="academy_session_menu"
+        name="Sessions"
+        parent="academy_menu_root"
+        action="academy_session_action"
+        sequence="10"/>
+
+</odoo>
