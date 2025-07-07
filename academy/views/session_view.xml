@@ -33,7 +33,8 @@
                         </group>
                         <group>
                             <field name="seats"/>
-                            <field name="taken_seats"/>
+                            <field name="attendee_ids" widget="many2many_tags"/>
+                            <field name="taken_seats" widget="progressbar"/>
                         </group>
                         <group>
                             <field name="course_id"/>

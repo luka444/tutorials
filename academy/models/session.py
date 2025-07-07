@@ -6,7 +6,10 @@ class Session(models.Model):
     _description = "Academy Session"
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char(string="Title", required=True)
+    name = fields.Char(
+        string="Title",
+        required=True,
+    )
     start_date = fields.Date()
     duration = fields.Float(digits=(6, 2))
     seats = fields.Integer(string="Number Of Seats")
@@ -15,11 +18,15 @@ class Session(models.Model):
         string="Seats",
         compute="_compute_taken_seats",
     )
+    attendee_ids = fields.Many2many(comodel_name="res.partner")
 
     @api.depends("seats")
     def _compute_taken_seats(self):
         for rec in self:
-            rec.taken_seats = 0.0
+            if rec.seats != 0:
+                rec.taken_seats = 100 * len(rec.attendee_ids) / rec.seats
+            else:
+                rec.taken_seats = 0.0
 
     @api.onchange("seats")
     def _onchange_seats(self):
