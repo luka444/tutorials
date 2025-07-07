@@ -19,6 +19,7 @@ class Session(models.Model):
         compute="_compute_taken_seats",
     )
     attendee_ids = fields.Many2many(comodel_name="res.partner")
+    free_seats = fields.Integer(compute="_compute_free_seats")
 
     @api.depends("seats")
     def _compute_taken_seats(self):
@@ -27,6 +28,14 @@ class Session(models.Model):
                 rec.taken_seats = 100 * len(rec.attendee_ids) / rec.seats
             else:
                 rec.taken_seats = 0.0
+
+    @api.depends("seats", "attendee_ids")
+    def _compute_free_seats(self):
+        for rec in self:
+            if rec.seats > 0:
+                rec.free_seats = rec.seats - len(rec.attendee_ids)
+            else:
+                rec.free_seats = 0
 
     @api.onchange("seats")
     def _onchange_seats(self):

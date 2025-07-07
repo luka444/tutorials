@@ -35,6 +35,7 @@
                             <field name="seats"/>
                             <field name="attendee_ids" widget="many2many_tags"/>
                             <field name="taken_seats" widget="progressbar"/>
+                            <field name="free_seats"/>
                         </group>
                         <group>
                             <field name="course_id"/>
@@ -46,10 +47,40 @@
         </field>
     </record>
 
+    <record id="academy_session_view_search" model="ir.ui.view">
+        <field name="name">academy.session.view.search</field>
+        <field name="model">academy.session</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="course_id"/>
+                <field name="start_date"/>
+                <field name="attendee_ids"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="academy_session_view_kanban" model="ir.ui.view">
+        <field name="name">academy.session.view.kanban</field>
+        <field name="model">academy.session</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record">
+                            <strong><field name="name"/></strong>
+                            <field name="course_id"/>
+                            <field name="start_date" />
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <record id="academy_session_action" model="ir.actions.act_window">
         <field name="name">Sessions</field>
         <field name="res_model">academy.session</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">kanban,list,form</field>
     </record>
 
 </odoo>

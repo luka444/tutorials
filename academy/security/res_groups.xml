@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="academy_category" model="ir.module.category">
+        <field name="name">Academy</field>
+    </record>
+
+    <record id="academy_course_manager" model="res.groups">
+        <field name="name">Course Manager</field>
+        <field name="category_id" ref="academy_category"/>
+    </record>
+</odoo>

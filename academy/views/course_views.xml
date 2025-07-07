@@ -17,6 +17,9 @@
         <field name="model">academy.course</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button string="Sessions" name="action_open_sessions" type="object" class="oe_highlight"/>
+                </header>
                 <sheet>
                     <div class="oe_title">
                         <h1>
