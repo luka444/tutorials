@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class Session(models.Model):
@@ -20,8 +21,20 @@ class Session(models.Model):
     )
     attendee_ids = fields.Many2many(comodel_name="res.partner")
     free_seats = fields.Integer(compute="_compute_free_seats")
+    is_user_already_registered = fields.Boolean(compute="_compute_is_user_already_registered")
 
-    @api.depends("seats")
+    def action_register(self):
+        current_user = self.env.user.partner_id
+        if current_user in self.attendee_ids:
+            raise ValidationError("You are already registered for this session")
+        if len(self.attendee_ids) >= self.seats:
+            raise ValidationError("Seats are full")
+        self.attendee_ids += current_user
+
+    def _compute_is_user_already_registered(self):
+        for rec in self:
+            rec.is_user_already_registered = rec.attendee_ids.filtered(lambda s: s == self.env.user.partner_id)
+
     def _compute_taken_seats(self):
         for rec in self:
             if rec.seats != 0:
@@ -29,7 +42,6 @@ class Session(models.Model):
             else:
                 rec.taken_seats = 0.0
 
-    @api.depends("seats", "attendee_ids")
     def _compute_free_seats(self):
         for rec in self:
             if rec.seats > 0:
