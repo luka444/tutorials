@@ -3,3 +3,4 @@ access_academy_course,Access Academy Course,academy.model_academy_course,base.gr
 access_academy_course_manager,Access Academy Course Manager,academy.model_academy_course,academy.academy_course_manager,1,1,1
 access_academy_session,Access Academy Session,academy.model_academy_session,base.group_user,1,0,0,0
 access_academy_session_manager,Access Academy Session Manager,academy.model_academy_session,academy.academy_course_manager,1,1,1,1
+access_academy_session_change_wizard,Access Academy Session Change Wizard,academy.model_academy_session_change_wizard,base.group_user,1,1,1,1

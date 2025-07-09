@@ -23,6 +23,16 @@ class Session(models.Model):
     free_seats = fields.Integer(compute="_compute_free_seats")
     is_user_already_registered = fields.Boolean(compute="_compute_is_user_already_registered")
 
+    def action_change_course(self):
+        return {
+            "name": "Change Course",
+            "type": "ir.actions.act_window",
+            "res_model": "academy.session.change.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {"active_ids": self.ids},
+        }
+
     def action_register(self):
         current_user = self.env.user.partner_id
         if current_user in self.attendee_ids:

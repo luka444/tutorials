@@ -6,6 +6,9 @@
         <field name="model">academy.session</field>
         <field name="arch" type="xml">
             <list>
+                <header>
+                    <button string="Change Course" name="action_change_course" type="object" class="oe_highlight"/>
+                </header>
                 <field name="name"/>
                 <field name="course_id"/>
                 <field name="start_date"/>

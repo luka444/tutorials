@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="academy_session_change_wizard_view_form" model="ir.ui.view">
+        <field name="name">academy.session.change.wizard.view.form</field>
+        <field name="model">academy.session.change.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="course_id"/>
+                        </group> 
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Apply" type="object" name="action_apply" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="academy_session_change_wizard_action" model="ir.actions.act_window">
+        <field name="name">Change Course</field>
+        <field name="res_model">academy.session.change.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
