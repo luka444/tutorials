@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="course_report_template_details">
+        <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <h2>Course Report</h2>
+                        <br></br>
+                        <h3>Name: <span t-field="o.name"/></h3>
+                        <h3>Responsible: <span t-field="o.responsible_id"/></h3>
+                        <h4>Description</h4>
+                        <span t-field="o.description"/>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <h4>Sessions</h4>
+                        <hr />
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Start Date</th>
+                                    <th>Duration</th>
+                                    <th>Seats</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.session_ids" t-as="session">
+                                    <tr>
+                                        <td><t t-esc="session.name"/></td>
+                                        <td><t t-esc="session.start_date"/></td>
+                                        <td><t t-esc="session.duration"/></td>
+                                        <td><t t-esc="session.seats"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_academy_course_report" model="ir.actions.report">
+        <field name="name">Course Report</field>
+        <field name="model">academy.course</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">academy.course_report_template_details</field>
+        <field name="report_file">academy.course_report_template_details</field>
+        <field name="binding_model_id" ref="academy.model_academy_course"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

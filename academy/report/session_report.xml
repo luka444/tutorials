@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+       
+    <template id="session_report_template_details">
+        <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <h2>Session Report</h2>
+                        <br></br>
+                        <h3>Name: <span t-field="o.name"/></h3>
+                        <h3>Responsible: <span t-field="o.responsible_id"/></h3>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_academy_session_report" model="ir.actions.report">
+        <field name="name">Session Report</field>
+        <field name="model">academy.session</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">academy.session_report_template_details</field>
+        <field name="report_file">academy.session_report_template_details</field>
+        <field name="binding_model_id" ref="academy.model_academy_session"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
